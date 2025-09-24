@@ -195,84 +195,74 @@
             display: inline-block;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 1.5rem 0;
+        /* Layout mejorado sin videos */
+        .content-section {
+            margin: 2rem 0;
         }
 
         .media-section {
             background: var(--secondary-color);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 15px;
             border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
         }
 
-        .media-placeholder {
+        /* Estilos para galería de imágenes mejorada */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .image-item {
             background: var(--primary-color);
-            border: 2px dashed var(--accent-color);
-            border-radius: 10px;
-            padding: 2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
             text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .image-title {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 1rem;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .image-item img {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .image-item:hover img {
+            transform: scale(1.02);
+            border-color: var(--accent-color);
+        }
+
+        .image-description {
+            margin-top: 1rem;
             color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
-
-        .media-placeholder svg {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Estilos para galería de imágenes */
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 1.5rem 0;
-}
-
-.image-item {
-    background: var(--secondary-color);
-    border-radius: 15px;
-    padding: 1.5rem;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.image-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-}
-
-.image-title {
-    color: var(--accent-color);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent-color);
-}
-
-.image-item img {
-    width: 100%;
-    max-width: 400px;
-    height: 250px;                    /* ⭐ AQUÍ: altura fija */
-    object-fit: cover;                /* ⭐ AQUÍ: mantiene proporción */
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-/* Y más estilos... */
 
         .objectives-list {
             list-style: none;
@@ -281,11 +271,17 @@
 
         .objectives-list li {
             background: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            padding: 1rem;
-            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            padding: 1.2rem;
+            border-radius: 12px;
             border-left: 4px solid var(--accent-color);
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .objectives-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
         }
 
         .objectives-list li::before {
@@ -293,36 +289,55 @@
             color: var(--accent-color);
             font-weight: bold;
             margin-right: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
 
         .material-item {
             background: var(--secondary-color);
-            padding: 1rem;
-            border-radius: 10px;
+            padding: 1.5rem;
+            border-radius: 12px;
             text-align: center;
             border: 1px solid var(--border-color);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .material-item::before {
+            content: '⚙️';
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
         .material-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .material-item strong {
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .code-section {
             background: var(--primary-color);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 15px;
             border: 1px solid var(--border-color);
             position: relative;
             overflow-x: auto;
+            margin: 2rem 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
 
         .code-header {
@@ -331,11 +346,18 @@
             margin-bottom: 1rem;
             color: var(--accent-color);
             font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .code-header::before {
+            content: '💻';
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .code-content {
             background: #000;
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 8px;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
@@ -352,19 +374,36 @@
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        .diagram-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--border-color);
         }
 
         .conclusions {
             background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 15px;
             border: 1px solid var(--accent-secondary);
             margin-top: 2rem;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.1);
+        }
+
+        .conclusions::before {
+            content: '📋';
+            font-size: 1.5rem;
+            display: inline-block;
+            margin-right: 0.5rem;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .content-grid {
+            .image-gallery {
                 grid-template-columns: 1fr;
             }
             
@@ -380,6 +419,10 @@
             .materials-grid {
                 grid-template-columns: 1fr;
             }
+
+            .project-card {
+                padding: 1.5rem;
+            }
         }
 
         /* Footer */
@@ -389,6 +432,22 @@
             margin-top: 3rem;
             border-top: 1px solid var(--border-color);
             color: var(--text-secondary);
+        }
+
+        /* Animaciones adicionales */
+        .project-card {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -424,10 +483,9 @@
             <div class="project-card">
                 <h2 class="project-title">Proyecto de Simulación de Semáforo con Arduino</h2>
                 
-                <div class="content-grid">
+                <div class="content-section">
                     <div class="media-section">
                         <h3 class="section-title">Imágenes del Proyecto</h3>
-                        <!-- GALERÍA DE IMÁGENES CON TÍTULOS -->
                         <div class="image-gallery">
                             <div class="image-item">
                                 <div class="image-title">🔌 Arduino Uno</div>
@@ -439,7 +497,7 @@
                             
                             <div class="image-item">
                                 <div class="image-title">💡 LED Rojo Funcionando</div>
-                                <img src="https://i.ibb.co/KpnpWdcz/Semaforo-Rojo.jpg" alt="Semaforo-Rojo" alt="Semaforo Rojo">
+                                <img src="https://i.ibb.co/KpnpWdcz/Semaforo-Rojo.jpg" alt="Semaforo Rojo">
                                 <div class="image-description">
                                     Demostración de los LEDs encendiéndose en secuencia programada.
                                 </div>
@@ -454,24 +512,10 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="media-section">
-                        <h3 class="section-title">Video Demostración</h3>
-                        <div class="media-placeholder">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <p>Video del funcionamiento del sistema</p>
-                        </div>
-                        <p><strong>Descripción del video:</strong> Demostración del encendido y apagado secuencial de LEDs controlados por Arduino mediante programación.</p>
-                    </div>
                 </div>
 
                 <h3 class="section-title">Introducción</h3>
-                <p>Este proyecto consiste en la implementación de un semáforo funcional utilizando una placa Arduino UNO y una protoboard.<br>
-                El objetivo principal es simular el funcionamiento real de un semáforo controlando tres LEDs (verde, amarillo y rojo) mediante programación.<br>
-                Este tipo de proyecto es útil para entender conceptos de electrónica básica, control de salidas digitales, estructuras de control y temporización en Arduino.
-                </p>
+                <p>Este proyecto consiste en la implementación de un semáforo funcional utilizando una placa Arduino UNO y una protoboard. El objetivo principal es simular el funcionamiento real de un semáforo controlando tres LEDs (verde, amarillo y rojo) mediante programación. Este tipo de proyecto es útil para entender conceptos de electrónica básica, control de salidas digitales, estructuras de control y temporización en Arduino.</p>
 
                 <h3 class="section-title">Objetivos</h3>
                 <ul class="objectives-list">
@@ -493,7 +537,7 @@
                         <p>Componentes de salida visual</p>
                     </div>
                     <div class="material-item">
-                        <strong>Resistencias 220Ω (3 unidades)</strong>
+                        <strong>Resistencias 220Ω</strong>
                         <p>Limitadores de corriente</p>
                     </div>
                     <div class="material-item">
@@ -501,7 +545,7 @@
                         <p>Base para conexiones</p>
                     </div>
                     <div class="material-item">
-                        <strong>Cables Jumper (3 unidades)</strong>
+                        <strong>Cables Jumper</strong>
                         <p>Cables de conexión</p>
                     </div>
                     <div class="material-item">
@@ -512,15 +556,13 @@
 
                 <h3 class="section-title">Diagrama de Conexiones</h3>
                 <div class="diagram-section">
-                    <div class="media-placeholder">
-                        <img src="https://i.ibb.co/Xdyhzdv/Diagrama-Semaforo.png" alt="Diagrama Semaforo">
-                    </div>
+                    <img src="https://i.ibb.co/Xdyhzdv/Diagrama-Semaforo.png" alt="Diagrama Semaforo">
                 </div>
 
                 <h3 class="section-title">Código Fuente</h3>
                 <div class="code-section">
                     <div class="code-header">
-                        <span>💻 Código Arduino (C++)</span>
+                        <span>Código Arduino (C++)</span>
                     </div>
                     <div class="code-content">// Definición de pines
 int ledRojo = 11;
@@ -565,15 +607,7 @@ void loop() {
 
                 <div class="conclusions">
                     <h3 class="section-title">Conclusiones</h3>
-                    <p>• Se logró simular el funcionamiento de un semáforo real.<br>
-                    • Los tiempos de encendido de cada LED representan de forma aproximada los intervalos reales de un cruce vial.<br>
-                    • El parpadeo del LED verde indica que el cambio de luces está próximo, imitando los semáforos reales.<br>
-                    • Se comprendió la importancia del control de salidas digitales en sistemas embebidos.<br>
-                    • Arduino permite automatizar procesos de forma sencilla mediante programación.<br>
-                    • El proyecto refuerza conocimientos de electrónica básica y estructuras de control.<br>
-                    • Este mismo sistema puede ampliarse para controlar más semáforos o integrar sensores<br>
-
-                    </p>
+                    <p>Se logró simular el funcionamiento de un semáforo real. Los tiempos de encendido de cada LED representan de forma aproximada los intervalos reales de un cruce vial. El parpadeo del LED verde indica que el cambio de luces está próximo, imitando los semáforos reales. Se comprendió la importancia del control de salidas digitales en sistemas embebidos. Arduino permite automatizar procesos de forma sencilla mediante programación. El proyecto refuerza conocimientos de electrónica básica y estructuras de control. Este mismo sistema puede ampliarse para controlar más semáforos o integrar sensores.</p>
                 </div>
             </div>
         </div>
@@ -583,10 +617,9 @@ void loop() {
             <div class="project-card">
                 <h2 class="project-title">Proyecto De Encendido y apagado de un LED con pulsador usando Arduino</h2>
                 
-                <div class="content-grid">
+                <div class="content-section">
                     <div class="media-section">
                         <h3 class="section-title">Imágenes del Proyecto</h3>
-                        <!-- GALERÍA DE IMÁGENES CON TÍTULOS -->
                         <div class="image-gallery">
                             <div class="image-item">
                                 <div class="image-title">🔌 Circuito Boton</div>
@@ -605,33 +638,17 @@ void loop() {
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="media-section">
-                        <h3 class="section-title">Video Demostración</h3>
-                        <div class="media-placeholder">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <p>Funcionamiento del monitor de temperatura y humedad</p>
-                        </div>
-                        <p><strong>Descripción del video:</strong> Demostración en tiempo real de la lectura y visualización de datos de temperatura y humedad ambiente en el display LCD.</p>
-                    </div>
                 </div>
 
                 <h3 class="section-title">Introducción</h3>
-                <p>Este proyecto consiste en el control de un LED mediante un pulsador utilizando un Arduino UNO.<br>
-La lógica implementada permite que el LED cambie de estado cada vez que se presiona el botón:<br>
-•	Si estaba apagado, se enciende.<br>
-•	Si estaba encendido, se apaga.<br>
-Este tipo de práctica permite comprender el funcionamiento de entradas digitales, el uso de la resistencia pull-up interna de Arduino y el concepto de conmutación por pulsador.
-</p>
+                <p>Este proyecto consiste en el control de un LED mediante un pulsador utilizando un Arduino UNO. La lógica implementada permite que el LED cambie de estado cada vez que se presiona el botón: si estaba apagado, se enciende; si estaba encendido, se apaga. Este tipo de práctica permite comprender el funcionamiento de entradas digitales, el uso de la resistencia pull-up interna de Arduino y el concepto de conmutación por pulsador.</p>
 
                 <h3 class="section-title">Objetivos</h3>
                 <ul class="objectives-list">
                     <li>Implementar un sistema de encendido y apagado de un LED mediante un pulsador utilizando un Arduino UNO</li>
                     <li>Comprender el uso de entradas digitales en Arduino</li>
                     <li>Aplicar el concepto de resistencia interna INPUT_PULLUP</li>
-                    <li>Disimular el funcionamiento de un interruptor electrónico</li>
+                    <li>Simular el funcionamiento de un interruptor electrónico</li>
                     <li>Desarrollar habilidades básicas en programación y electrónica digital</li>
                 </ul>
 
@@ -669,15 +686,13 @@ Este tipo de práctica permite comprender el funcionamiento de entradas digitale
 
                 <h3 class="section-title">Diagrama de Conexiones</h3>
                 <div class="diagram-section">
-                    <div class="media-placeholder">
-                        <img src="https://i.ibb.co/wtd9yZZ/Diagrama-Boton.png" alt="Diagrama Boton">
-                    </div>
+                    <img src="https://i.ibb.co/wtd9yZZ/Diagrama-Boton.png" alt="Diagrama Boton">
                 </div>
 
                 <h3 class="section-title">Código Fuente</h3>
                 <div class="code-section">
                     <div class="code-header">
-                        <span>💻 Código Arduino - Encendido y apagado de un LED</span>
+                        <span>Código Arduino - Encendido y apagado de un LED</span>
                     </div>
                     <div class="code-content">int LED = 11;
 int pulsador = 2;
@@ -699,14 +714,7 @@ void loop() {
 
                 <div class="conclusions">
                     <h3 class="section-title">Conclusiones</h3>
-                    <p>• Al presionar el pulsador una vez, el LED rojo se enciende.<br>
-• Al presionarlo de nuevo, el LED se apaga.<br>
-• El circuito funciona como un interruptor electrónico controlado por Arduino<br>
-• Se comprendió el uso de entradas digitales en Arduino.<br>
-• El uso del INPUT_PULLUP simplifica el diseño evitando resistencias externas.<br>
-• El proyecto es una base sencilla para aplicaciones como interruptores, sistemas de encendido/apagado y menús interactivos.
-
-</p>
+                    <p>Al presionar el pulsador una vez, el LED rojo se enciende. Al presionarlo de nuevo, el LED se apaga. El circuito funciona como un interruptor electrónico controlado por Arduino. Se comprendió el uso de entradas digitales en Arduino. El uso del INPUT_PULLUP simplifica el diseño evitando resistencias externas. El proyecto es una base sencilla para aplicaciones como interruptores, sistemas de encendido/apagado y menús interactivos.</p>
                 </div>
             </div>
         </div>
@@ -716,10 +724,9 @@ void loop() {
             <div class="project-card">
                 <h2 class="project-title">Proyecto De Control de LED RGB</h2>
                 
-                <div class="content-grid">
+                <div class="content-section">
                     <div class="media-section">
                         <h3 class="section-title">Imágenes del Proyecto</h3>
-                        <!-- GALERÍA DE IMÁGENES CON TÍTULOS -->
                         <div class="image-gallery">
                             <div class="image-item">
                                 <div class="image-title">🔌 Circuito RGB</div>
@@ -731,37 +738,23 @@ void loop() {
                             
                             <div class="image-item">
                                 <div class="image-title">💡 Led Color Morado</div>
-                                <img src="https://i.ibb.co/8g6kM61w/LED-RGB-MORADO.png" alt="Circuito Boton 2">
+                                <img src="https://i.ibb.co/8g6kM61w/LED-RGB-MORADO.png" alt="LED RGB Morado">
                                 <div class="image-description">
                                     Demostración del LED encendiéndose de color morado.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="media-section">
-                        <h3 class="section-title">Video Demostración</h3>
-                        <div class="media-placeholder">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <p>Robot navegando y evitando obstáculos</p>
-                        </div>
-                        <p><strong>Descripción del video:</strong> Demostración del robot navegando autónomamente, detectando obstáculos y ejecutando maniobras de evasión.</p>
-                    </div>
                 </div>
 
                 <h3 class="section-title">Introducción</h3>
-                <p>Este proyecto consiste en controlar un LED RGB utilizando un Arduino UNO.<br>
-El LED RGB combina tres LEDs (rojo, verde y azul) en un solo encapsulado, lo que permite generar una gran variedad de colores al variar la intensidad de cada uno.<br>
-El objetivo es mostrar cómo, mediante programación y el uso de resistencias adecuadas, se pueden obtener diferentes combinaciones de colores de manera secuencial.
-</p>
+                <p>Este proyecto consiste en controlar un LED RGB utilizando un Arduino UNO. El LED RGB combina tres LEDs (rojo, verde y azul) en un solo encapsulado, lo que permite generar una gran variedad de colores al variar la intensidad de cada uno. El objetivo es mostrar cómo, mediante programación y el uso de resistencias adecuadas, se pueden obtener diferentes combinaciones de colores de manera secuencial.</p>
 
                 <h3 class="section-title">Objetivos</h3>
                 <ul class="objectives-list">
                     <li>Comprender el funcionamiento de un LED RGB</li>
                     <li>Aprender a manejar las salidas PWM del Arduino para controlar la intensidad de cada color</li>
-                    <li>Programar una secuencia de colores que simule un “ciclo de colores”</li>
+                    <li>Programar una secuencia de colores que simule un "ciclo de colores"</li>
                 </ul>
 
                 <h3 class="section-title">Materiales Utilizados</h3>
@@ -788,21 +781,19 @@ El objetivo es mostrar cómo, mediante programación y el uso de resistencias ad
                     </div>
                     <div class="material-item">
                         <strong>Cables Jumper</strong>
-                        <p>Fuente de alimentación</p>
+                        <p>Cables de conexión</p>
                     </div>
                 </div>
 
                 <h3 class="section-title">Diagrama de Conexiones</h3>
                 <div class="diagram-section">
-                    <div class="media-placeholder">
-                        <img src="https://i.ibb.co/HLKKGX8L/Diagrama-RGB.png" alt="Diagrama RGB">
-                    </div>
+                    <img src="https://i.ibb.co/HLKKGX8L/Diagrama-RGB.png" alt="Diagrama RGB">
                 </div>
 
                 <h3 class="section-title">Código Fuente</h3>
                 <div class="code-section">
                     <div class="code-header">
-                        <span>💻 Código Arduino - Control de LED RGB</span>
+                        <span>Código Arduino - Control de LED RGB</span>
                     </div>
                     <div class="code-content">// Pines para cada color
 const int redPin = 11;
@@ -845,10 +836,7 @@ void setColor(int red, int green, int blue) {
 
                 <div class="conclusions">
                     <h3 class="section-title">Conclusiones</h3>
-                    <p>•	El LED RGB permite visualizar cómo se mezclan los colores mediante la variación de intensidad en sus pines rojo, verde y azul.<br>
-•	El uso de analogWrite() brinda la posibilidad de controlar miles de colores, no solo los básicos.<br>
-•	Este proyecto es una base para aplicaciones más avanzadas, como sistemas de iluminación decorativa o efectos de luces controlados por sensores.
-</p>
+                    <p>El LED RGB permite visualizar cómo se mezclan los colores mediante la variación de intensidad en sus pines rojo, verde y azul. El uso de analogWrite() brinda la posibilidad de controlar miles de colores, no solo los básicos. Este proyecto es una base para aplicaciones más avanzadas, como sistemas de iluminación decorativa o efectos de luces controlados por sensores.</p>
                 </div>
             </div>
         </div>
@@ -858,37 +846,23 @@ void setColor(int red, int green, int blue) {
             <div class="project-card">
                 <h2 class="project-title">Proyecto De Control de un Servo Motor con Arduino UNO</h2>
                 
-                <div class="content-grid">
+                <div class="content-section">
                     <div class="media-section">
                         <h3 class="section-title">Imágenes del Proyecto</h3>
-                        <!-- GALERÍA DE IMÁGENES CON TÍTULOS -->
                         <div class="image-gallery">
                             <div class="image-item">
                                 <div class="image-title">🔌 Circuito Servo Motor</div>
-                                <img src="https://i.ibb.co/chfsdVVH/Servo-Motor.jpg" alt="Circuito RGB">
+                                <img src="https://i.ibb.co/chfsdVVH/Servo-Motor.jpg" alt="Servo Motor">
                                 <div class="image-description">
                                     Vista general del circuito del Servo Motor.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="media-section">
-                        <h3 class="section-title">Video Demostración</h3>
-                        <div class="media-placeholder">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <p>Funcionamiento del sistema de acceso</p>
-                        </div>
-                        <p><strong>Descripción del video:</strong> Demostración del sistema leyendo tarjetas RFID, validando acceso y activando el mecanismo de apertura con servo motor.</p>
-                    </div>
                 </div>
 
                 <h3 class="section-title">Introducción</h3>
-                <p>En este proyecto se utilizó un servo motor controlado con Arduino UNO para moverlo a diferentes ángulos. El programa hace que el servo gire primero a 90°, luego a 180°, y finalmente regrese a 0°, con pausas de 1 segundo entre cada movimiento.<br>
-                Este tipo de control es útil en robótica, brazos mecánicos, sistemas de dirección y automatización, donde se necesita un control preciso del ángulo de giro.
-                </p>
+                <p>En este proyecto se utilizó un servo motor controlado con Arduino UNO para moverlo a diferentes ángulos. El programa hace que el servo gire primero a 90°, luego a 180°, y finalmente regrese a 0°, con pausas de 1 segundo entre cada movimiento. Este tipo de control es útil en robótica, brazos mecánicos, sistemas de dirección y automatización, donde se necesita un control preciso del ángulo de giro.</p>
 
                 <h3 class="section-title">Objetivos</h3>
                 <ul class="objectives-list">
@@ -912,22 +886,20 @@ void setColor(int red, int green, int blue) {
                         <p>Motor de corriente continua</p>
                     </div>
                     <div class="material-item">
-                        <strong>Cables Jumper (3 unidades)</strong>
+                        <strong>Cables Jumper</strong>
                         <p>Cables de conexión</p>
                     </div>
                 </div>
 
                 <h3 class="section-title">Diagrama de Conexiones</h3>
                 <div class="diagram-section">
-                    <div class="media-placeholder">
-                        <img src="https://i.ibb.co/WJm6z6n/Diagrama-Servo-Motor.png" alt="Diagrama ServoMotor">
-                    </div>
+                    <img src="https://i.ibb.co/WJm6z6n/Diagrama-Servo-Motor.png" alt="Diagrama ServoMotor">
                 </div>
 
                 <h3 class="section-title">Código Fuente</h3>
                 <div class="code-section">
                     <div class="code-header">
-                        <span>💻 Código Arduino - Control de un Servo Motor</span>
+                        <span>Código Arduino - Control de un Servo Motor</span>
                     </div>
                     <div class="code-content">#include <Servo.h>
 
@@ -953,15 +925,7 @@ void loop() {
 
                 <div class="conclusions">
                     <h3 class="section-title">Conclusiones</h3>
-                    <p>•	El servo motor realizó correctamente los movimientos programados:
-	0° → 90° → 180° → 0°. <br>
-•	Se comprobó el uso de la librería Servo.h para facilitar la programación.<br>
-•	El proyecto demostró la utilidad del servo para movimientos mecánicos controlados en proyectos de electrónica y robótica.<br>
-•	Se logró controlar un servo motor mediante Arduino UNO de forma precisa y sencilla.<br>
-•	El uso de la librería Servo.h facilita la programación al permitir usar la función write() para establecer directamente el ángulo deseado.<br>
-•	Este proyecto es una base para futuros desarrollos en robótica, automatización y mecatrónica, donde el control de posición es fundamental.
-
-</p>
+                    <p>El servo motor realizó correctamente los movimientos programados: 0° → 90° → 180° → 0°. Se comprobó el uso de la librería Servo.h para facilitar la programación. El proyecto demostró la utilidad del servo para movimientos mecánicos controlados en proyectos de electrónica y robótica. Se logró controlar un servo motor mediante Arduino UNO de forma precisa y sencilla. El uso de la librería Servo.h facilita la programación al permitir usar la función write() para establecer directamente el ángulo deseado. Este proyecto es una base para futuros desarrollos en robótica, automatización y mecatrónica, donde el control de posición es fundamental.</p>
                 </div>
             </div>
         </div>
@@ -971,45 +935,30 @@ void loop() {
             <div class="project-card">
                 <h2 class="project-title">Proyecto De Control de LED con Potenciómetro en Arduino UNO</h2>
                 
-                <div class="content-grid">
+                <div class="content-section">
                     <div class="media-section">
                         <h3 class="section-title">Imágenes del Proyecto</h3>
-                        <!-- GALERÍA DE IMÁGENES CON TÍTULOS -->
                         <div class="image-gallery">
                             <div class="image-item">
                                 <div class="image-title">🔌 Circuito del Potenciómetro</div>
-                                <img src="https://i.ibb.co/twLVfHhb/Potenciador-Off.jpg" alt="Circuito RGB">
+                                <img src="https://i.ibb.co/twLVfHhb/Potenciador-Off.jpg" alt="Potenciómetro Off">
                                 <div class="image-description">
                                     Vista general del circuito del Potenciómetro.
                                 </div>
                             </div>
                             <div class="image-item">
-                                <div class="image-title">🔌 Circuito Servo Motor</div>
-                                <img src="https://i.ibb.co/39BB2CM0/Potenciador-On.jpg" alt="Circuito RGB">
+                                <div class="image-title">💡 LED Encendido</div>
+                                <img src="https://i.ibb.co/39BB2CM0/Potenciador-On.jpg" alt="Potenciómetro On">
                                 <div class="image-description">
                                     Vista del LED encendido por el Potenciómetro.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="media-section">
-                        <h3 class="section-title">Video Demostración</h3>
-                        <div class="media-placeholder">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            <p>Control remoto del brazo robótico via app móvil</p>
-                        </div>
-                        <p><strong>Descripción del video:</strong> Demostración del control inalámbrico del brazo robótico mediante aplicación móvil, mostrando movimientos de todas las articulaciones y garra.</p>
-                    </div>
                 </div>
 
                 <h3 class="section-title">Introducción</h3>
-                <p>Este mini proyecto consiste en el uso de un potenciómetro conectado a una placa Arduino UNO para controlar el brillo de un LED. El potenciómetro actúa como un divisor de voltaje que genera un valor analógico (0–1023), el cual se convierte en una señal PWM para ajustar la intensidad del LED.<br>
-El simulador utilizado fue Tinkercad Circuits.<br>
-Este tipo de control es útil en robótica, brazos mecánicos, sistemas de dirección y automatización, donde se necesita un control preciso del ángulo de giro.
-</p>
+                <p>Este mini proyecto consiste en el uso de un potenciómetro conectado a una placa Arduino UNO para controlar el brillo de un LED. El potenciómetro actúa como un divisor de voltaje que genera un valor analógico (0–1023), el cual se convierte en una señal PWM para ajustar la intensidad del LED. El simulador utilizado fue Tinkercad Circuits. Este tipo de control es útil para crear interfaces de usuario intuitivas donde se necesita ajustar parámetros de forma continua.</p>
 
                 <h3 class="section-title">Objetivos</h3>
                 <ul class="objectives-list">
@@ -1033,30 +982,28 @@ Este tipo de control es útil en robótica, brazos mecánicos, sistemas de direc
                         <p>Base para conexiones</p>
                     </div>
                     <div class="material-item">
-                        <strong>Potenciómetro 250 Ω</strong>
-                        <p>Componente que limita la corriente que pasa por el LED</p>
+                        <strong>Potenciómetro 250Ω</strong>
+                        <p>Control variable de voltaje</p>
                     </div>
                     <div class="material-item">
                         <strong>Cables Jumper</strong>
                         <p>Cables de conexión</p>
                     </div>
                     <div class="material-item">
-                        <strong>Resistencia 220 Ω</strong>
+                        <strong>Resistencia 220Ω</strong>
                         <p>Limitadores de corriente</p>
                     </div>
                 </div>
 
                 <h3 class="section-title">Diagrama de Conexiones</h3>
                 <div class="diagram-section">
-                    <div class="media-placeholder">
-                        <img src="https://i.ibb.co/WN5hzPWw/Diagrama-Potenciometro.png" alt="Diagrama Potenciometro">
-                    </div>
+                    <img src="https://i.ibb.co/WN5hzPWw/Diagrama-Potenciometro.png" alt="Diagrama Potenciometro">
                 </div>
 
                 <h3 class="section-title">Código Fuente</h3>
                 <div class="code-section">
                     <div class="code-header">
-                        <span>💻 Código Arduino - Control de LED con Potenciómetro</span>
+                        <span>Código Arduino - Control de LED con Potenciómetro</span>
                     </div>
                     <div class="code-content">int potPin = A0;     // Pin del potenciómetro
 int ledPin = 11;     // Pin del LED (PWM)
@@ -1085,15 +1032,7 @@ void loop() {
 
                 <div class="conclusions">
                     <h3 class="section-title">Conclusiones</h3>
-                    <p>• El LED varía su intensidad de luz según la posición del potenciómetro: apagado (0), intermedio o máximo (255).<br>
-• En el monitor serie se observan los valores en tiempo real.<br>
-• El sistema responde de manera fluida y lineal al giro del potenciómetro.<br>
-• El potenciómetro es un componente útil para generar entradas analógicas variables.<br>
-• Con la función map(), se puede adaptar el rango de valores analógicos a diferentes necesidades.<br>
-• Se comprendió el uso del PWM en Arduino para controlar dispositivos como LEDs o motores.<br>
-• Este proyecto es una base para crear sistemas de control más complejos (ejemplo: control de velocidad de motores, volumen de audio, etc.).
-
-</p>
+                    <p>El LED varía su intensidad de luz según la posición del potenciómetro: apagado (0), intermedio o máximo (255). En el monitor serie se observan los valores en tiempo real. El sistema responde de manera fluida y lineal al giro del potenciómetro. El potenciómetro es un componente útil para generar entradas analógicas variables. Con la función map(), se puede adaptar el rango de valores analógicos a diferentes necesidades. Se comprendió el uso del PWM en Arduino para controlar dispositivos como LEDs o motores. Este proyecto es una base para crear sistemas de control más complejos (ejemplo: control de velocidad de motores, volumen de audio, etc.).</p>
                 </div>
             </div>
         </div>
@@ -1102,7 +1041,7 @@ void loop() {
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 - Portafolio de Evidencias en Robótica</p>
-            <p>Desarrollado por: Yahir Bautista Islas, Erick López García, Juan José Méndez Castillejos</p>
+            <p>Desarrollado por: Yahir Bautista Islas - Erick López García - Juan José Méndez Castillejos</p>
         </div>
     </footer>
 
@@ -1154,6 +1093,24 @@ void loop() {
                 item.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1)';
                     this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Efectos adicionales para las imágenes
+            const imageItems = document.querySelectorAll('.image-item');
+            imageItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const img = this.querySelector('img');
+                    if (img) {
+                        img.style.transform = 'scale(1.05)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    const img = this.querySelector('img');
+                    if (img) {
+                        img.style.transform = 'scale(1)';
+                    }
                 });
             });
         });
