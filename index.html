@@ -475,6 +475,7 @@
                 <button class="nav-btn" onclick="showProject(3)">Proyecto 3</button>
                 <button class="nav-btn" onclick="showProject(4)">Proyecto 4</button>
                 <button class="nav-btn" onclick="showProject(5)">Proyecto 5</button>
+                <button class="nav-btn" onclick="showProject(6)">Proyecto 6</button>
             </div>
         </nav>
 
@@ -1036,6 +1037,157 @@ void loop() {
                 </div>
             </div>
         </div>
+                <!-- Proyecto 6 -->
+        <div id="project6" class="project-section">
+            <div class="project-card">
+                <h2 class="project-title">El Uso del Sensor Ultrasonico en la Activacion de un Led</h2>
+                
+                <div class="content-section">
+                    <div class="media-section">
+                        <h3 class="section-title">Imágenes del Proyecto</h3>
+                        <div class="image-gallery">
+                            <div class="image-item">
+                                <div class="image-title">🔌 Circuito de conexion</div>
+                                <img src="https://i.ibb.co/gbpxfLnH/Screenshot-2025-11-14-17-10-09.png" alt="Conexion al Sensor">
+                                <div class="image-description">
+                                    Vista Directa a la conexion.
+                                </div>
+                            </div>
+                            
+                            <div class="image-item">
+                                <div class="image-title">💡 Distancia De no Encendido</div>
+                                <img src="https://i.ibb.co/Y4f3P9cn/Screenshot-2025-11-14-14-25-37.png" alt="LED no Encendido">
+                                <div class="image-description">
+                                    Demostración de la distancia en Donde el led no enciende.
+                                </div>
+                                
+                             <div class="image-item">
+                                <div class="image-title">💡 Distancia De Encendido</div>
+                                <img src="https://i.ibb.co/zHjxNf8h/Screenshot-2025-11-14-14-26-07.png" alt="LED Encendido">
+                                <div class="image-description">
+                                    Demostración de la distancia en Donde el led ya enciende.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Introducción</h3>
+                <p>Este proyecto consiste en controlar un LED utilizando un Arduino UNO y un sensor ultrasonico. El LED encendera si esta un objeto a cierta distancia minima, si no es asi no encendera el LED. El objetivo es mostrar cómo, mediante programación y el uso de resistencias adecuadas, se pueden obtener informacion del area mediante el uso del sensor ultrasonico.</p>
+
+                <h3 class="section-title">Objetivos</h3>
+                <ul class="objectives-list">
+                    <li>Comprender el funcionamiento de un Sensor Ultrasonico</li>
+                    <li>Aprender a manejar las salidas PWM del Arduino para controlar La distancia y el area circundantes</li>
+                </ul>
+
+                <h3 class="section-title">Materiales Utilizados</h3>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <strong>Arduino Uno</strong>
+                        <p>Controlador principal</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Protoboard</strong>
+                        <p>Base para conexiones</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Sensor Ultrasonico</strong>
+                        <p>Sensor usado para marcar la distancia</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Resistencias 220Ω</strong>
+                        <p>Limitadores de corriente</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Cable USB</strong>
+                        <p>Conexión y alimentación</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Cables Jumper</strong>
+                        <p>Cables de conexión</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>LED</strong>
+                        <p>Un Marcador de activacion</p>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Diagrama de Conexiones</h3>
+                <div class="diagram-section">
+                    <img src="https://i.ibb.co/Xx2fqZ5G/Screenshot-2025-11-14-14-26-43.png" alt="Diagrama Sensor">
+                </div>
+
+                <h3 class="section-title">Código Fuente</h3>
+                <div class="code-section">
+                    <div class="code-header">
+                        <span>Código Arduino - Control del Sensor Ultrasonico</span>
+                    </div>
+                    <div class="code-content">// Pines del sensor
+const int trigPin = 9;
+const int echoPin = 10;
+
+// Pin del LED
+const int ledPin = 8; // Conecta el LED (con su resistencia) a este pin
+
+// Variables para la medición
+long duration;
+int distance;
+
+// Distancia máxima en centímetros para encender el LED
+const int maxDistance = 200;
+
+void setup() {
+  // Configura los pines del sensor y del LED
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  
+  // Inicia la comunicación serial para depuración
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Limpia el pin trig del sensor
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  
+  // Envía una onda ultrasónica (pulso)
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // Mide el tiempo de retorno de la onda
+  duration = pulseIn(echoPin, HIGH);
+  
+  // Calcula la distancia en centímetros
+  distance = duration * 0.034 / 2;
+  
+  // Muestra la distancia en el Monitor Serial (útil para depurar)
+  Serial.print("Distancia: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  
+  // Comprueba si la distancia es menor que el umbral
+  if (distance < maxDistance) {
+    // Si es menor, enciende el LED
+    digitalWrite(ledPin, HIGH);
+  } else {
+    // Si no, apaga el LED
+    digitalWrite(ledPin, LOW);
+  }
+  
+  // Pequeña pausa antes de la siguiente lectura
+  delay(50); 
+}</div>
+                </div>
+
+                <div class="conclusions">
+                    <h3 class="section-title">Conclusiones</h3>
+                    <p>El Sensor ultrasonico permite visualizar cómo los robots pueden ver su entorno sin la necesidad de usar equipos de grabacion o algun tipo de ellos para su funcionamiento</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="footer">
@@ -1117,4 +1269,5 @@ void loop() {
     </script>
 </body>
 </html>
+
 
