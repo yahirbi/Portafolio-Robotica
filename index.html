@@ -480,6 +480,7 @@
                 <button class="nav-btn" onclick="showProject(8)">Proyecto 8</button>
                 <button class="nav-btn" onclick="showProject(9)">Proyecto 9</button>
                 <button class="nav-btn" onclick="showProject(10)">Proyecto 10</button>
+                <button class="nav-btn" onclick="showProject(ROBOT)">Proyecto ROBOT</button>
             </div>
         </nav>
 
@@ -1262,7 +1263,7 @@ void loop() {
                 <h3 class="section-title">Código Fuente</h3>
                 <div class="code-section">
                     <div class="code-header">
-                        <span>Código Arduino - Control del Sensor Ultrasonico</span>
+                        <span>Código Arduino - Control del LED Con arduino</span>
                     </div>
                     <div class="code-content">// Pines del sensor
 const int LED = 9;
@@ -1483,6 +1484,242 @@ void loop() {
                 </div>
             </div>
         </div>
+    
+            <!-- Proyecto ROBOT -->
+        <div id="projectROBOT" class="project-section">
+            <div class="project-card">
+                <h2 class="project-title">Uso de lo Aprendido para Creacion del Robot Seguidor de linea</h2>
+                
+                <div class="content-section">
+                    <div class="media-section">
+                        <h3 class="section-title">Imágenes del Proyecto</h3>
+                        <div class="image-gallery">
+                            <div class="image-item">
+                                <div class="image-title">🔌 Uso de Materiales para el Robot</div>
+                                <img src="https://i.ibb.co/RkGt2HTx/Screenshot-2025-11-16-22-44-44.png" alt="Procesos de Conexion">
+                                <div class="image-description">
+                                    Pruebas de Procesos de Conexion.
+                                </div>
+                            <div class="image-item">
+                                <div class="image-title">🔌 Uso de nueva carcaza</div>
+                                <img src="https://i.ibb.co/wZvgWKtH/Screenshot-2025-11-16-22-44-26.png" alt="Uso de nueva Carcaza por espacio">
+                                <div class="image-description">
+                                    Uso de nueva carcaza y otros objetos de comprobacion.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Introducción</h3>
+                <p>El armado de un carrito educativo controlado mediante un sistema de iluminación constituye una práctica fundamental para comprender la integración de componentes electrónicos y mecánicos en proyectos de robótica básica. En este caso, el diseño utiliza dos baterías como fuente de energía, un puente H como controlador de los motores DC, y un sensor de luz (LDR o similar) que actúa como elemento de activación.</p>
+
+                <h3 class="section-title">Objetivos</h3>
+                <ul class="objectives-list">
+                    <li>Comprender el uso de fuentes de energía en proyectos de robótica</li>
+                    <li>Aprender el funcionamiento del puente H</li>
+                    <li>Introducir el uso de sensores de luz como disparadores de eventos</li>
+                    <li>Integrar componentes electrónicos y mecánicos en un mismo proyecto</li>
+                </ul>
+
+                <h3 class="section-title">Materiales Utilizados</h3>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <strong>Arduino Uno</strong>
+                        <p>Controlador principal</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Robot educativo básico</strong>
+                        <p>Base De los matriales</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Motores de tracción</strong>
+                        <p>Uso para mover el Robot</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Cable USB</strong>
+                        <p>Conexión y alimentación</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Cables Jumper</strong>
+                        <p>Cables de conexión</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Baterías</strong>
+                        <p>Area para funcionar todo</p>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Código Fuente</h3>
+                <div class="code-section">
+                    <div class="code-header">
+                        <span>Código Arduino - Codigo para el Robot</span>
+                    </div>
+                    <div class="code-content">// Pines L298N
+const int ENA = 10;    // PWM para motor izquierdo (puedes cambiar si usas otro pin)
+const int IN1 = 12;    // motor izquierdo direc A
+const int IN2 = 7;     // motor izquierdo direc B
+
+const int ENB = 11;    // PWM para motor derecho (según tu indicación)
+const int IN3 = 8;     // motor derecho direc A
+const int IN4 = 9;     // motor derecho direc B
+
+// Pines LDR (entradas analógicas)
+// Ajusta si tu placa no tiene A6; en Arduino UNO A6 no existe
+const int LDR_LEFT  = A6; // LDR lado izquierdo (lo llamaste puerto 6)
+const int LDR_RIGHT = A5; // LDR lado derecho (lo llamaste puerto 5)
+
+// Parámetros de control
+const int baseSpeed = 200;   // velocidad base PWM (0-255)
+const int turnSpeed = 220;   // velocidad al girar
+const int thresholdDiff = 30; // diferencia mínima entre lecturas para considerar "más luz"
+
+// Filtrado simple
+const int samples = 6;
+const int sampleDelay = 5; // ms
+
+void setup() {
+  // Pines del L298N como salida
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+
+  pinMode(ENB, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+  // Inicializa motores parados
+  stopMotors();
+
+  // Serial para depuración
+  Serial.begin(9600);
+}
+
+int readLDR(int pin) {
+  long sum = 0;
+  for (int i = 0; i < samples; i++) {
+    sum += analogRead(pin);
+    delay(sampleDelay);
+  }
+  return sum / samples;
+}
+
+void loop() {
+  int ldrL = readLDR(LDR_LEFT);
+  int ldrR = readLDR(LDR_RIGHT);
+
+  Serial.print("LDR L: ");
+  Serial.print(ldrL);
+  Serial.print("  R: ");
+  Serial.println(ldrR);
+
+  int diff = ldrL - ldrR;
+
+  // Si la diferencia es pequeña, avanza recto hacia la fuente de luz promedio
+  if (abs(diff) <= thresholdDiff) {
+    // Si ambas lecturas son bajas (oscuridad) se queda quieto
+    if (ldrL < 100 && ldrR < 100) {
+      stopMotors();
+    } else {
+      forward(baseSpeed);
+    }
+    return;
+  }
+
+  // Si LDR derecha tiene más luz -> girar a la derecha (motor izquierdo adelante, derecho parado o hacia atrás suave)
+  if (diff < 0) {
+    // Girar derecha: detener motor derecho, acelerar izquierdo
+    turnRight();
+    return;
+  }
+
+  // Si LDR izquierda tiene más luz -> girar a la izquierda
+  if (diff > 0) {
+    // Girar izquierda: detener motor izquierdo, acelerar derecho
+    turnLeft();
+    return;
+  }
+}
+
+// Movimientos básicos
+void forward(int speed) {
+  // Motor izquierdo adelante
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, speed);
+
+  // Motor derecho adelante
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, speed);
+}
+
+void backward(int speed) {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, speed);
+
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, speed);
+}
+
+void stopMotors() {
+  analogWrite(ENA, 0);
+  analogWrite(ENB, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+}
+
+void turnLeft() {
+  // Opción 1: girar en sitio (izq hacia atrás, der hacia adelante)
+  // analogWrite(ENA, turnSpeed);
+  // analogWrite(ENB, turnSpeed);
+  // digitalWrite(IN1, LOW);
+  // digitalWrite(IN2, HIGH);
+  // digitalWrite(IN3, HIGH);
+  // digitalWrite(IN4, LOW);
+
+  // Opción 2: giro suave (detener motor izquierdo, mover derecho hacia adelante)
+  analogWrite(ENA, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, turnSpeed);
+}
+
+void turnRight() {
+  // Opción 1: girar en sitio (izq adelante, der atrás)
+  // analogWrite(ENA, turnSpeed);
+  // analogWrite(ENB, turnSpeed);
+  // digitalWrite(IN1, HIGH);
+  // digitalWrite(IN2, LOW);
+  // digitalWrite(IN3, LOW);
+  // digitalWrite(IN4, HIGH);
+
+  // Opción 2: giro suave (detener motor derecho, mover izquierdo hacia adelante)
+  analogWrite(ENB, 0);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, turnSpeed);
+}</div>
+                </div>
+
+                <div class="conclusions">
+                    <h3 class="section-title">Conclusiones</h3>
+                    <p>La práctica permitió comprobar cómo la integración de componentes básicos —fuentes de energía, puente H, motores y sensor de luz— puede dar lugar a un sistema autónomo capaz de responder a estímulos externos. El encendido y apagado de la luz se convierte en el elemento de control principal, demostrando la relación directa entre una señal de entrada y la acción mecánica del carrito.
+</p>
+                </div>
+            </div>
+        </div>
 
     <footer class="footer">
         <div class="container">
@@ -1563,6 +1800,7 @@ void loop() {
     </script>
 </body>
 </html>
+
 
 
 
