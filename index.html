@@ -476,6 +476,7 @@
                 <button class="nav-btn" onclick="showProject(4)">Proyecto 4</button>
                 <button class="nav-btn" onclick="showProject(5)">Proyecto 5</button>
                 <button class="nav-btn" onclick="showProject(6)">Proyecto 6</button>
+                <button class="nav-btn" onclick="showProject(7)">Proyecto 7</button>
             </div>
         </nav>
 
@@ -1186,6 +1187,102 @@ void loop() {
                     <h3 class="section-title">Conclusiones</h3>
                     <p>El Sensor ultrasonico permite visualizar cómo los robots pueden ver su entorno sin la necesidad de usar equipos de grabacion o algun tipo de ellos para su funcionamiento</p>
                 </div>
+                            <!-- Proyecto 7 -->
+        <div id="project7" class="project-section">
+            <div class="project-card">
+                <h2 class="project-title">El Uso del Sensor Ultrasonico en la Activacion de un Led</h2>
+                
+                <div class="content-section">
+                    <div class="media-section">
+                        <h3 class="section-title">Imágenes del Proyecto</h3>
+                        <div class="image-gallery">
+                            <div class="image-item">
+                                <div class="image-title">🔌 Encendido de un led con arduino</div>
+                                <img src="https://i.ibb.co/Gv5KZkbm/Screenshot-2025-11-16-21-19-04.png" alt="Conexion del Arduino al protoboard ">
+                                <div class="image-description">
+                                    Vista Directa a la conexion.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Introducción</h3>
+                <p>Como primera practica realizamos el encender un LED mediante un código que teníamos que hacer que se detuviera por 1 segundo, para después probar por mas tiempos (2, 5, 10 segundos).</p>
+
+                <h3 class="section-title">Objetivos</h3>
+                <ul class="objectives-list">
+                    <li>Programar el encendido y apagado de un LED funcional mediante un Arduino UNO y un protoboard</li>
+                    <li>Comprender el funcionamiento del pin digital de salida</li>
+                    <li>Aprender a manejar la temporización de eventos mediante la función delay()</li>
+                    <li>Desarrollar habilidades básicas de conexión de componentes electrónicos </li>
+                </ul>
+
+                <h3 class="section-title">Materiales Utilizados</h3>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <strong>Arduino Uno</strong>
+                        <p>Controlador principal</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Protoboard</strong>
+                        <p>Base para conexiones</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Resistencias 220Ω</strong>
+                        <p>Limitadores de corriente</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Cable USB</strong>
+                        <p>Conexión y alimentación</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>Cables Jumper</strong>
+                        <p>Cables de conexión</p>
+                    </div>
+                    <div class="material-item">
+                        <strong>LED</strong>
+                        <p>Un Marcador de activacion</p>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Diagrama de Conexiones</h3>
+                <div class="diagram-section">
+                    <img src="https://i.ibb.co/Xx2fqZ5G/Screenshot-2025-11-14-14-26-43.png" alt="Diagrama Sensor">
+                </div>
+
+                <h3 class="section-title">Código Fuente</h3>
+                <div class="code-section">
+                    <div class="code-header">
+                        <span>Código Arduino - Control del Sensor Ultrasonico</span>
+                    </div>
+                    <div class="code-content">// Pines del sensor
+const int LED = 9;
+
+void setup() {
+  // Configura los pines del sensor y del LED
+  pinMode(LED, OUTPUT);
+  
+  // Inicia la comunicación serial para depuración
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(LED, HIGH);
+  delay(1000);
+  digitalWrite(LED, LOW);
+  delay(1000);
+}</div>
+                </div>
+
+                <div class="conclusions">
+                    <h3 class="section-title">Conclusiones</h3>
+                    <p>Se logro simular el funcionamiento de un LED. Se comprendió la importancia en como utilizar el intervalo de tiempo ya sea un segundo, dos segundos y así. Esta práctica refuerza los conocimientos de electrónica básicos, así como su estructura.</p>
+                </div>
+            </div>
+        </div>
+                    
             </div>
         </div>
     </div>
@@ -1269,5 +1366,6 @@ void loop() {
     </script>
 </body>
 </html>
+
 
 
